@@ -56,15 +56,15 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 One note before you delve into your tasks: for each endpoint you are expected to define the endpoint and response data. The frontend will be a plentiful resource because it is set up to expect certain endpoints and response data formats already. You should feel free to specify endpoints in your own way; if you do so, make sure to update the frontend or you will get some unexpected behavior. 
 
-1. Use Flask-CORS to enable cross-domain requests and set response headers. 
+1. Use Flask-CORS to enable cross-domain requests and set response headers. DONE
 2. Create an endpoint to handle GET requests for questions, including pagination (every 10 questions). This endpoint should return a list of questions, number of total questions, current category, categories. 
-3. Create an endpoint to handle GET requests for all available categories. 
-4. Create an endpoint to DELETE question using a question ID. 
-5. Create an endpoint to POST a new question, which will require the question and answer text, category, and difficulty score. 
-6. Create a POST endpoint to get questions based on category. 
-7. Create a POST endpoint to get questions based on a search term. It should return any questions for whom the search term is a substring of the question. 
-8. Create a POST endpoint to get questions to play the quiz. This endpoint should take category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions. 
-9. Create error handlers for all expected errors including 400, 404, 422 and 500. 
+3. Create an endpoint to handle GET requests for all available categories. DONE
+4. Create an endpoint to DELETE question using a question ID. DONE
+5. Create an endpoint to POST a new question, which will require the question and answer text, category, and difficulty score. DONE
+6. Create a POST endpoint to get questions based on category. DONE
+7. Create a POST endpoint to get questions based on a search term. It should return any questions for whom the search term is a substring of the question. DONE
+8. Create a POST endpoint to get questions to play the quiz. This endpoint should take category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions. DONE
+9. Create error handlers for all expected errors including 400, 404, 422 and 500. DONE
 
 REVIEW_COMMENT
 ```
@@ -87,6 +87,134 @@ GET '/categories'
 '5' : "Entertainment",
 '6' : "Sports"}
 
+```
+
+## API reference
+
+### Error handling
+Error are returned as JSON objects in the following format: 
+```json
+{
+    "success": False,
+    "error": 400,
+    "message": "bad request"
+}
+```
+The API will return four error types when request fail:
+
+- 400: bad request
+- 404: resource not found
+- 422: unprocessable
+- 405: method not allowed
+
+### Endpoints
+
+#### GET /categories
+- General: Returns a dictionary of categories, with id and the type.
+- Sample: `curl http://127.0.0.1:5000/categories`
+
+
+```json
+{
+    '1' : "Science",
+    '2' : "Art",
+    '3' : "Geography",
+    '4' : "History",
+    '5' : "Entertainment",
+    '6' : "Sports"
+}
+```
+
+#### GET /questions
+- General: Return a list of questions, number of total questions, current category, categories. Results are paginated in groups of 10.
+- Sample: `curl http://127.0.0.1:5000/questions?page={page_number}`
+
+
+```json
+{
+  "categories": {
+    "1": "Science", 
+    "2": "Art", 
+    "3": "Geography", 
+    "4": "History", 
+    "5": "Entertainment", 
+    "6": "Sports"
+  }, 
+  "questions": [
+    {
+      "answer": "Apollo 13", 
+      "category": 5, 
+      "difficulty": 4, 
+      "id": 2, 
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    }, 
+    {
+      "answer": "Maya Angelou", 
+      "category": 4, 
+      "difficulty": 2, 
+      "id": 5, 
+      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
+    }, 
+    {
+      "answer": "Edward Scissorhands", 
+      "category": 5, 
+      "difficulty": 3, 
+      "id": 6, 
+      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
+    }, 
+    {
+      "answer": "Muhammad Ali", 
+      "category": 4, 
+      "difficulty": 1, 
+      "id": 9, 
+      "question": "What boxer's original name is Cassius Clay?"
+    }, 
+    {
+      "answer": "Brazil", 
+      "category": 6, 
+      "difficulty": 3, 
+      "id": 10, 
+      "question": "Which is the only team to play in every soccer World Cup tournament?"
+    }, 
+    {
+      "answer": "Uruguay", 
+      "category": 6, 
+      "difficulty": 4, 
+      "id": 11, 
+      "question": "Which country won the first ever soccer World Cup in 1930?"
+    }, 
+    {
+      "answer": "George Washington Carver", 
+      "category": 4, 
+      "difficulty": 2, 
+      "id": 12, 
+      "question": "Who invented Peanut Butter?"
+    }, 
+    {
+      "answer": "Lake Victoria", 
+      "category": 3, 
+      "difficulty": 2, 
+      "id": 13, 
+      "question": "What is the largest lake in Africa?"
+    }, 
+    {
+      "answer": "The Palace of Versailles", 
+      "category": 3, 
+      "difficulty": 3, 
+      "id": 14, 
+      "question": "In which royal palace would you find the Hall of Mirrors?"
+    }, 
+    {
+      "answer": "Agra", 
+      "category": 3, 
+      "difficulty": 2, 
+      "id": 15, 
+      "question": "The Taj Mahal is located in which Indian city?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 25
+}
 ```
 
 
